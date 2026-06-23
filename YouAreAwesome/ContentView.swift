@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var message = ""
-    @State private var imageName = ""
+    @State private var index = -1
+    let messages = ["You are Awesome!", "You are Great!", "You are Fantastic!", "Fabulous? That's You!"]
     
     var body: some View {
         
@@ -17,7 +18,7 @@ struct ContentView: View {
             
             Spacer()
             
-            Image(imageName)
+            Image("image\(index)")
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.orange)
@@ -27,18 +28,15 @@ struct ContentView: View {
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundStyle(.red)
+                .multilineTextAlignment(.center)
             
             Spacer()
             
             Button("Press Me!") {
                 
-                let message1 = "You are Awesome!"
-                let message2 = "You are Great!"
-                let imageString1 = "image0"
-                let imageString2 = "image1"
-                
-                message = message == message1 ? message2 : message1
-                imageName = imageName == imageString1 ? imageString2 : imageString1
+                index = (index + 1) % messages.count
+                message = messages[index]
+                print(index, message)
             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
