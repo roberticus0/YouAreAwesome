@@ -40,11 +40,11 @@ struct ContentView: View {
             
             Button("Press Me!") {
                 
-                msgIndex = (msgIndex + 1) % messages.count
+                msgIndex = Int.random(in:0..<messages.count)
                 message = messages[msgIndex]
                 print(msgIndex, message)
                 
-                imgIndex = (imgIndex + 1) % 10
+                imgIndex = Int.random(in: 0...9)
             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
