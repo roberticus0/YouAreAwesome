@@ -9,8 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var message = ""
-    @State private var index = -1
-    let messages = ["You are Awesome!", "You are Great!", "You are Fantastic!", "Fabulous? That's You!"]
+    @State private var msgIndex = -1
+    @State private var imgIndex = -1
+    let messages = ["You are Awesome!", "You are Great!", "You are Fantastic!", "Fabulous? That's You!", "Gadzooks my friend! I am astohnished at how utterly magnificent you are!", "When the Genius Bar Needs Help, They Call You!"]
     
     var body: some View {
         
@@ -18,25 +19,32 @@ struct ContentView: View {
             
             Spacer()
             
-            Image("image\(index)")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.orange)
-                .clipShape(RoundedRectangle(cornerRadius: 30))
-            
             Text(message)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundStyle(.red)
                 .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.5)
+                .frame(height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                .animation(.easeInOut(duration: 0.15), value: msgIndex)
+            
+            Image("image\(msgIndex)")
+                .resizable()
+                .scaledToFit()
+                .foregroundStyle(.orange)
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .shadow(radius: 30)
+                .animation(.default, value: imgIndex)
             
             Spacer()
             
             Button("Press Me!") {
                 
-                index = (index + 1) % messages.count
-                message = messages[index]
-                print(index, message)
+                msgIndex = (msgIndex + 1) % messages.count
+                message = messages[msgIndex]
+                print(msgIndex, message)
+                
+                imgIndex = (imgIndex + 1) % 10
             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
